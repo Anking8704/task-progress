@@ -5,8 +5,7 @@ description: Keep a live task checklist (plan) visible to the user while working
 
 # Task Progress
 
-The user follows your progress through a checklist shown under your messages, not by reading your text.
-Keeping that checklist current is part of doing the task.
+Keep the task checklist current and visible to the user. Display depends on the host: in some Codex desktop versions the list is shown on hover over the progress indicator while the turn is active.
 
 ## Tool
 
@@ -25,8 +24,7 @@ Use the built-in `update_plan` tool. Each call sends the WHOLE list:
 
 `status` is one of `pending`, `in_progress`, `completed`.
 
-If `update_plan` is not available, print the same list as Markdown instead, using
-`- [x]` for completed, `- [ ] ⏳` for in progress and `- [ ]` for pending, and reprint it whenever it changes.
+If `update_plan` is not available, or the user needs a checklist visible in chat, print the same list as Markdown, using `- [x]` for completed, `- [ ] ⏳` for in progress and `- [ ]` for pending. Reprint it whenever it changes. When the tool is available, continue updating it even if you also display Markdown.
 
 ## Rules
 
@@ -41,7 +39,7 @@ If `update_plan` is not available, print the same list as Markdown instead, usin
 5. **Plan changed? Resend the whole list.** If you discover new work, drop a step, or the user redirects
    you mid-task, call `update_plan` with the new full list (use `explanation` to say why), so the shown
    list never describes an abandoned plan.
-6. **Don't duplicate.** Don't also write the plan as a numbered list in your message; the checklist is the plan.
+6. **Don't duplicate.** Don't also write the plan as a numbered list in your message; a Markdown checklist may be used when needed for visibility.
 7. **Finish cleanly.** When everything is done, mark every step `completed`, then end with a 2–3 sentence
    recap: what is now true, and anything not done or not verified (e.g. "未提交", "未在真机上测试").
    Report failures honestly — a step whose check failed is not `completed`; say what failed.
